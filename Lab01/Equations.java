@@ -35,7 +35,7 @@ public class Equations {
             }
             case 3: {
                 double a, b, c;
-                System.out.println("2nd-degree eq with 1 var: ax^2 + bx + c = 0\na, b, c: ");
+                System.out.print("2nd-degree eq with 1 var: ax^2 + bx + c = 0\na, b, c: ");
                 a = input.nextDouble();
                 b = input.nextDouble();
                 c = input.nextDouble();
