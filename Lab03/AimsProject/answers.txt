@@ -1,0 +1,3 @@
+2_method_overloading
+    Q: Try to add a method addDigitalVideoDisc which allows to pass an arbitrary number of arguments for dvd. Compare to an array parameter. What do you prefer in this case?
+    A: We can't add both, because JVM prohibits defining both the array and varargs versions of a method. These two share the same Method Signature at the Bytecode level, and Java treats them the same, internally as an array. I prefer the varargs approach as it offers higher flexibility. While both internal array, varargs can accept object(s) (arbitrary number: 0, 1, or more), or an explicit array, whereas the array version strictly limited to array objects only.
