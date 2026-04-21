@@ -5,7 +5,7 @@ public class AIMS {
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
 
-        anOrder.addDigitalVideoDisc(new DigitalVideoDisc[]{dvd1, dvd2});
+        anOrder.addDigitalVideoDisc(dvd1, dvd2);
         anOrder.addDigitalVideoDisc(dvd3);
 
         System.out.println("The total cost: " + anOrder.totalCost());

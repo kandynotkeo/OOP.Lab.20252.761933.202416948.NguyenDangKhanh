@@ -1,3 +1,15 @@
 2_method_overloading
     Q: Try to add a method addDigitalVideoDisc which allows to pass an arbitrary number of arguments for dvd. Compare to an array parameter. What do you prefer in this case?
     A: We can't add both, because JVM prohibits defining both the array and varargs versions of a method. These two share the same Method Signature at the Bytecode level, and Java treats them the same, internally as an array. I prefer the varargs approach as it offers higher flexibility. While both internal array, varargs can accept object(s) (arbitrary number: 0, 1, or more), or an explicit array, whereas the array version strictly limited to array objects only.
+
+
+
+3_passing_parameter
+    Q: Is JAVA a Pass by Value or a Pass by Reference programming language?
+    A: Java is a pass-by-value programming language. When you pass arg to a method, the JVM creates a copy of it and all the changes are made only applied to that copy; the original variable is untouchable. For an object, the JVM passes a copy of its reference, which means they point to the same object, but it is not the original variable reference.
+
+    Q: After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
+    A: When you pass o1 and o2, the JVM creates a copy for each of those objects, so that all the reassignments after that are applied to the copies, not the original objects.
+
+    Q: After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
+    A: In changeTitle, you call the setter (setTitle), which has access to original object and you change the object through its original reference.
