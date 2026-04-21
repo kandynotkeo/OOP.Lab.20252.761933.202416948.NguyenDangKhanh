@@ -1,5 +1,8 @@
 public class DigitalVideoDisc {
+    // classifier properties
     private static int nbDigitalVideoDiscs = 0;
+
+    // instance properties
     private int id;
     private String title;
     private String category;
@@ -7,6 +10,7 @@ public class DigitalVideoDisc {
     private int length;
     private float cost;
 
+    // constructors
     public DigitalVideoDisc() {
         nbDigitalVideoDiscs++;
         id = nbDigitalVideoDiscs;
@@ -33,15 +37,18 @@ public class DigitalVideoDisc {
         this.length = length;
     }
 
+    // classifier methods
     public static int getNbDigitalVideoDiscs() {
         return nbDigitalVideoDiscs;
     }
 
+    // getters, setters
     public int getId() {
         return id;
     }
 
     public String getTitle() {
+        if (title == null || title.isEmpty()) return "Unknown";
         return title;
     }
 
@@ -50,6 +57,7 @@ public class DigitalVideoDisc {
     }
 
     public String getCategory() {
+        if (title == null) return "Unclassified";
         return category;
     }
 
@@ -58,6 +66,7 @@ public class DigitalVideoDisc {
     }
 
     public String getDirector() {
+        if (director == null) return "Anonymous";
         return director;
     }
 
@@ -79,5 +88,11 @@ public class DigitalVideoDisc {
 
     public void setCost(float cost) {
         this.cost = cost;
+    }
+
+    // instance methods
+    @Override
+    public String toString() {
+        return "DVD - " + getTitle() + " - " + getCategory() + " - " + getDirector() + " - " + (length < 0 ? "N/A" : length + " mins") + ": " + (cost < 0 ? "N/A" : cost + "$");
     }
 }
