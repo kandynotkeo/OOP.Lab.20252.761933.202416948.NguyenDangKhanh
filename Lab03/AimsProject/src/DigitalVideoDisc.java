@@ -3,7 +3,7 @@ public class DigitalVideoDisc {
     private static int nbDigitalVideoDiscs = 0;
 
     // instance properties
-    private int id;
+    private final int id;
     private String title;
     private String category;
     private String director;

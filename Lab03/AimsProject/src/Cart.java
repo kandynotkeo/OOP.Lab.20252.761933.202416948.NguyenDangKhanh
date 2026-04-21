@@ -1,12 +1,10 @@
-import javax.swing.plaf.synth.SynthTextAreaUI;
-
 public class Cart {
     // classifier properties
     public static final int MAX_NUMBERS_ORDERED = 20;
 
     // instance properties
     private int qtyOrdered = 0;
-    private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
+    private final DigitalVideoDisc[] itemsOrdered = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
 
     // instance methods
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
@@ -31,15 +29,14 @@ public class Cart {
 */
 
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        for (int i = 0; i < qtyOrdered; i++) {
+        for (int i = 0; i < qtyOrdered; i++)
             if (itemsOrdered[i] == disc) {
-                for (int j = i; j < qtyOrdered - 1; j++) itemsOrdered[j] = itemsOrdered[j + 1];
                 qtyOrdered--;
+                for (int j = i; j < qtyOrdered; j++) itemsOrdered[j] = itemsOrdered[j + 1];
                 itemsOrdered[qtyOrdered] = null;
                 System.out.println("Removed from cart.");
                 return;
             }
-        }
         System.out.println("Not exist in cart.");
     }
 
