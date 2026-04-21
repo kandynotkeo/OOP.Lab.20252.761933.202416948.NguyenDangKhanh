@@ -95,4 +95,8 @@ public class DigitalVideoDisc {
     public String toString() {
         return "DVD - " + getTitle() + " - " + getCategory() + " - " + getDirector() + " - " + (length < 0 ? "N/A" : length + " mins") + ": " + (cost < 0 ? "N/A" : cost + "$");
     }
+
+    public boolean isMatch(String title) {
+        return this.title.equals(title);
+    }
 }

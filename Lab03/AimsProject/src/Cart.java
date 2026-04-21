@@ -43,11 +43,24 @@ public class Cart {
         System.out.println("Not exist in cart.");
     }
 
-    public float totalCost() {
-        float cost = 0f;
+    public DigitalVideoDisc search(int id) {
         for (int i = 0; i < qtyOrdered; i++)
-            cost += itemsOrdered[i].getCost();
-        return cost;
+            if (itemsOrdered[i].getId() == id) {
+                System.out.println("In cart: " + itemsOrdered[i].toString());
+                return itemsOrdered[i];
+            }
+        System.out.println("DVD not found in cart.");
+        return null;
+    }
+
+    public DigitalVideoDisc search(String title) {
+        for (int i = 0; i < qtyOrdered; i++)
+            if (itemsOrdered[i].isMatch(title)) {
+                System.out.println("In cart: " + itemsOrdered[i].toString());
+                return itemsOrdered[i];
+            }
+        System.out.println("DVD not found in cart.");
+        return null;
     }
 
     public void print() {
@@ -56,5 +69,12 @@ public class Cart {
         for (int i = 0; i < qtyOrdered; i++) System.out.println((i + 1) + ". " + itemsOrdered[i].toString());
         System.out.println("Total cost: " + totalCost());
         System.out.println("***************************************************");
+    }
+
+    public float totalCost() {
+        float cost = 0f;
+        for (int i = 0; i < qtyOrdered; i++)
+            cost += itemsOrdered[i].getCost();
+        return cost;
     }
 }
