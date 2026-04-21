@@ -1,8 +1,14 @@
+import javax.swing.plaf.synth.SynthTextAreaUI;
+
 public class Cart {
+    // classifier properties
     public static final int MAX_NUMBERS_ORDERED = 20;
+
+    // instance properties
     private int qtyOrdered = 0;
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
 
+    // instance methods
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered >= MAX_NUMBERS_ORDERED) {
             System.out.println("The cart is full.");
@@ -42,5 +48,13 @@ public class Cart {
         for (int i = 0; i < qtyOrdered; i++)
             cost += itemsOrdered[i].getCost();
         return cost;
+    }
+
+    public void print() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
+        for (int i = 0; i < qtyOrdered; i++) System.out.println((i + 1) + ". " + itemsOrdered[i].toString());
+        System.out.println("Total cost: " + totalCost());
+        System.out.println("***************************************************");
     }
 }
