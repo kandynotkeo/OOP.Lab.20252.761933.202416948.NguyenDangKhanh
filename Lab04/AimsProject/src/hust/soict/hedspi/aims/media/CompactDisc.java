@@ -3,7 +3,7 @@ package hust.soict.hedspi.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompactDisc extends Disc {
+public class CompactDisc extends Disc implements Playable {
     // instance properties
     private String artist;
     private List<Track> tracks = new ArrayList<Track>();
@@ -15,10 +15,17 @@ public class CompactDisc extends Disc {
 
     // getters, setters
     public String getArtist() {
+        if (artist == null || artist.isEmpty()) return "Anonymous";
         return artist;
     }
 
     // instance methods
+    public void play() {
+        String artist = getArtist();
+        System.out.println("Playing CD:");
+        for (Track track : tracks) track.play();
+    }
+
     public void addTrack(Track track) {
         if (tracks.contains(track)) {
             System.out.println("Track is already existed.");

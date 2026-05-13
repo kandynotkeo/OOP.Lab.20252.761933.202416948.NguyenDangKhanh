@@ -12,7 +12,7 @@ public class Disc extends Media {
 
     // getters, setters
     public String getDirector() {
-        if (director == null) return "Anonymous";
+        if (director == null || director.isEmpty()) return "Anonymous";
         return director;
     }
 

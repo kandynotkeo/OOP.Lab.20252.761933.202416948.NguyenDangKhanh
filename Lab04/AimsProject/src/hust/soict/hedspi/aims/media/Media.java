@@ -30,7 +30,7 @@ public abstract class Media {
     }
 
     public String getCategory() {
-        if (title == null) return "Unclassified";
+        if (title == null || title.isEmpty()) return "Unclassified";
         return category;
     }
 

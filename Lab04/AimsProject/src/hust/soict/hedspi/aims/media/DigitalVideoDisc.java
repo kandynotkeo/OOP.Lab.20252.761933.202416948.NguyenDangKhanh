@@ -1,6 +1,6 @@
 package hust.soict.hedspi.aims.media;
 
-public class DigitalVideoDisc extends Disc {
+public class DigitalVideoDisc extends Disc implements Playable {
     // classifier properties
     private static int nbDigitalVideoDiscs = 0;
 
@@ -38,6 +38,10 @@ public class DigitalVideoDisc extends Disc {
     }
 
     // instance methods
+    public void play() {
+        System.out.println("Playing DVD: " + getTitle() + " (" + getLength() + "s)");
+    }
+
     @Override
     public String toString() {
         float cost = getCost();
