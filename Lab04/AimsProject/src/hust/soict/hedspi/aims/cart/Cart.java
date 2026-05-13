@@ -1,81 +1,72 @@
 package hust.soict.hedspi.aims.cart;
 
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.media.Media;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cart {
     // classifier properties
     public static final int MAX_NUMBERS_ORDERED = 20;
 
     // instance properties
-    private int qtyOrdered = 0;
-    private final DigitalVideoDisc[] itemsOrdered = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
+    private List<Media> itemsOrdered = new ArrayList<Media>();
 
     // instance methods
-    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        if (qtyOrdered >= MAX_NUMBERS_ORDERED) {
-            System.out.println("The cart is full.");
+    public void addMedia(Media media) {
+        if (itemsOrdered.contains(media)) System.out.println("Media is already in cart.");
+        else {
+            itemsOrdered.add(media);
+            System.out.println("Added to cart.");
+        }
+    }
+
+    public void addMedia(Media... mediaList) {
+        for (Media media : mediaList) addMedia(media);
+    }
+
+    public void removeMedia(Media media) {
+        if (itemsOrdered.contains(media)) {
+            itemsOrdered.remove(media);
+            System.out.println("Removed from cart.");
             return;
         }
-        itemsOrdered[qtyOrdered] = disc;
-        qtyOrdered++;
-        System.out.println("Added to cart.");
-    }
-
-    public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
-        for (DigitalVideoDisc dvd : dvdList) addDigitalVideoDisc(dvd);
-    }
-
-/*
-    public void addDigitalVideoDisc(hust.soict.hedspi.aims.media.DigitalVideoDisc dvd1, hust.soict.hedspi.aims.media.DigitalVideoDisc dvd2) {
-        addDigitalVideoDisc(dvd1);
-        addDigitalVideoDisc(dvd2);
-    }
-*/
-
-    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        for (int i = 0; i < qtyOrdered; i++)
-            if (itemsOrdered[i] == disc) {
-                qtyOrdered--;
-                for (int j = i; j < qtyOrdered; j++) itemsOrdered[j] = itemsOrdered[j + 1];
-                itemsOrdered[qtyOrdered] = null;
-                System.out.println("Removed from cart.");
-                return;
-            }
         System.out.println("Not exist in cart.");
     }
 
-    public DigitalVideoDisc search(int id) {
-        for (int i = 0; i < qtyOrdered; i++)
-            if (itemsOrdered[i].getId() == id) {
-                System.out.println("In cart: " + itemsOrdered[i].toString());
-                return itemsOrdered[i];
+    public Media search(int id) {
+        for (Media mediaInList : itemsOrdered)
+            if (mediaInList.getId() == id) {
+                System.out.println("Media found in cart.");
+                return mediaInList;
             }
         System.out.println("DVD not found in cart.");
         return null;
     }
 
-    public DigitalVideoDisc search(String title) {
-        for (int i = 0; i < qtyOrdered; i++)
-            if (itemsOrdered[i].isMatch(title)) {
-                System.out.println("In cart: " + itemsOrdered[i].toString());
-                return itemsOrdered[i];
+    public Media search(String title) {
+        for (Media mediaInList : itemsOrdered)
+            if (mediaInList.getTitle().equals(title)) {
+                System.out.println("Media found in cart.");
+                return mediaInList;
             }
         System.out.println("DVD not found in cart.");
         return null;
     }
 
     public void print() {
+        int order = 1;
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
-        for (int i = 0; i < qtyOrdered; i++) System.out.println((i + 1) + ". " + itemsOrdered[i].toString());
+        for (Media mediaInList : itemsOrdered) System.out.println(order + ". " + mediaInList.getTitle());
         System.out.println("Total cost: " + totalCost());
         System.out.println("***************************************************");
     }
 
     public float totalCost() {
         float cost = 0f;
-        for (int i = 0; i < qtyOrdered; i++)
-            cost += itemsOrdered[i].getCost();
+        for (Media mediaInList : itemsOrdered) cost += mediaInList.getCost();
         return cost;
     }
 }

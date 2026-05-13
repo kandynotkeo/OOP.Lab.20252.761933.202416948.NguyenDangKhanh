@@ -10,14 +10,14 @@ public class AIMS {
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
 
-        anOrder.addDigitalVideoDisc(dvd1, dvd2);
-        anOrder.addDigitalVideoDisc(dvd3);
+        anOrder.addMedia(dvd1, dvd2);
+        anOrder.addMedia(dvd3);
 
         anOrder.print();
 
-        anOrder.removeDigitalVideoDisc(dvd3);
-        anOrder.removeDigitalVideoDisc(dvd1);
-        anOrder.removeDigitalVideoDisc(dvd2);
+        anOrder.removeMedia(dvd3);
+        anOrder.removeMedia(dvd1);
+        anOrder.removeMedia(dvd2);
 
         anOrder.print();
     }
