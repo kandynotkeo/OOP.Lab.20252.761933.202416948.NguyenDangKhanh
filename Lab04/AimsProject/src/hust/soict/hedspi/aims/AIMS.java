@@ -7,15 +7,16 @@ import java.util.List;
 
 public class AIMS {
     public static void main(String[] args) {
-        DigitalVideoDisc dvd = new DigitalVideoDisc();
-        CompactDisc cd = new CompactDisc();
-        Book book = new Book();
+        DigitalVideoDisc dvd = new DigitalVideoDisc(null, null, null, 0, 4);
+        CompactDisc cd = new CompactDisc("a CD", null, null, 0, 3);
         List<Media> media = new ArrayList<Media>();
         media.add(dvd);
         media.add(cd);
-        media.add(book);
-        for (Media m : media) {
-            System.out.println(m.toString());
-        }
+
+        System.out.println(media);
+        media.sort(Media.COMPARE_BY_TITLE_COST);
+        System.out.println(media);
+        media.sort(Media.COMPARE_BY_COST_TITLE);
+        System.out.println(media);
     }
 }
