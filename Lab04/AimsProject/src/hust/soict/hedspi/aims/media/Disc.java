@@ -6,18 +6,19 @@ public class Disc extends Media {
     private int length;
 
     // constructors
-    public Disc() {
-        super();
+    public Disc(int id, String title, String director, String category, int length, double cost) {
+        super(id, title, category, cost);
+        this.director = sanitise(director);
+        this.length = Math.max(length, 0);
     }
 
     // getters, setters
     public String getDirector() {
-        if (director == null || director.isEmpty()) return "Anonymous";
         return director;
     }
 
     public void setDirector(String director) {
-        this.director = director;
+        this.director = sanitise(director);
     }
 
     public int getLength() {
@@ -25,6 +26,17 @@ public class Disc extends Media {
     }
 
     public void setLength(int length) {
-        this.length = length;
+        if (length > 0) this.length = length;
+    }
+
+    // instance methods
+    public String formatDirector() {
+        return director == null ? "anonymous" : director;
+    }
+
+    public String formatLength() {
+        if (length <= 0) return "unavailable";
+        int min = length / 60, sec = length % 60;
+        return String.format("%d:%02d", min, sec);
     }
 }

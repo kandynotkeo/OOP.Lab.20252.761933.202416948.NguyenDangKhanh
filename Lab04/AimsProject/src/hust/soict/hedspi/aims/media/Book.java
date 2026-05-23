@@ -7,17 +7,16 @@ public class Book extends Media {
     // instance properties
     private List<String> authors = new ArrayList<String>();
 
+    // classifier properties
+    private static int nbDBooks = 0;
+
     // constructors
     public Book() {
-        super();
+        this(null, null, 0);
     }
 
-    public Book(int id, String title, String category, float cost) {
-        this();
-        setId(id);
-        setTitle(title);
-        setCategory(category);
-        setCost(cost);
+    public Book(String title, String category, double cost) {
+        super(++nbDBooks, title, category, cost);
     }
 
     // getters, setters

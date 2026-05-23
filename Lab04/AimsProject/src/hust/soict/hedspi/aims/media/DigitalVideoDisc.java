@@ -6,30 +6,11 @@ public class DigitalVideoDisc extends Disc implements Playable {
 
     // constructors
     public DigitalVideoDisc() {
-        super();
-        nbDigitalVideoDiscs++;
-        setId(nbDigitalVideoDiscs);
+        this(null, null, null, 0, 0);
     }
 
-    public DigitalVideoDisc(String title) {
-        this();
-        setTitle(title);
-    }
-
-    public DigitalVideoDisc(String title, String category, float cost) {
-        this(title);
-        setCategory(category);
-        setCost(cost);
-    }
-
-    public DigitalVideoDisc(String title, String category, String director, float cost) {
-        this(title, category, cost);
-        setDirector(director);
-    }
-
-    public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        this(title, category, director, cost);
-        setLength(length);
+    public DigitalVideoDisc(String title, String director, String category, int length, double cost) {
+        super(++nbDigitalVideoDiscs, title, director, category, length, cost);
     }
 
     // classifier methods
@@ -39,6 +20,6 @@ public class DigitalVideoDisc extends Disc implements Playable {
 
     // instance methods
     public void play() {
-        System.out.println("Playing DVD: " + getTitle() + " (" + getLength() + "s)");
+        System.out.println("Playing DVD: " + formatTitle() + " (" + formatLength() + ")");
     }
 }

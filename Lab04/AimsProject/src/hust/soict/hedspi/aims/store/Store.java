@@ -1,6 +1,5 @@
 package hust.soict.hedspi.aims.store;
 
-import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import hust.soict.hedspi.aims.media.Media;
 
 import java.util.ArrayList;
@@ -44,8 +43,8 @@ public class Store {
         System.out.println("***************************************************");
     }
 
-    public float totalCost() {
-        float cost = 0f;
+    public double totalCost() {
+        double cost = 0f;
         for (Media mediaInList : itemsInStore) cost += mediaInList.getCost();
         return cost;
     }
