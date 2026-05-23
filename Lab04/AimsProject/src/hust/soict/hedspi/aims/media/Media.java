@@ -1,5 +1,8 @@
 package hust.soict.hedspi.aims.media;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class Media {
     // instance properties
     private final int id;
@@ -70,5 +73,19 @@ public abstract class Media {
             return titleA.equals(titleB);
         }
         return false;
+    }
+
+    protected Map<String, Object> getDetails() {
+        Map<String, Object> details = new HashMap<>();
+        details.put("id", id);
+        details.put("title", formatTitle());
+        details.put("category", formatCategory());
+        details.put("cost", formatCost());
+        return details;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + ": " + getDetails().toString();
     }
 }

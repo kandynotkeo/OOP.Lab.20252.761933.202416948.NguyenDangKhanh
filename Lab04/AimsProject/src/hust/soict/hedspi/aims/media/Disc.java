@@ -1,5 +1,7 @@
 package hust.soict.hedspi.aims.media;
 
+import java.util.Map;
+
 public class Disc extends Media {
     // instance properties
     private String director;
@@ -38,5 +40,12 @@ public class Disc extends Media {
         if (length <= 0) return "unavailable";
         int min = length / 60, sec = length % 60;
         return String.format("%d:%02d", min, sec);
+    }
+
+    protected Map<String, Object> getDetails() {
+        Map<String, Object> details = super.getDetails();
+        details.put("director", formatDirector());
+        details.put("length", formatLength());
+        return details;
     }
 }

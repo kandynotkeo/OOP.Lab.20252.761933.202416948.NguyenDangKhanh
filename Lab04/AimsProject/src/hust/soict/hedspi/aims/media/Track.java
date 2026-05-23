@@ -1,6 +1,9 @@
 package hust.soict.hedspi.aims.media;
 
-public class Track {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Track implements Playable {
     // instance properties
     private String title;
     private int length;
@@ -49,5 +52,17 @@ public class Track {
 
     public void play() {
         System.out.println("Playing track: " + formatTitle() + " (" + formatLength() + ")");
+    }
+
+    protected Map<String, Object> getDetails() {
+        Map<String, Object> details = new HashMap<>();
+        details.put("title", formatTitle());
+        details.put("length", formatLength());
+        return details;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + ": " + getDetails().toString();
     }
 }
