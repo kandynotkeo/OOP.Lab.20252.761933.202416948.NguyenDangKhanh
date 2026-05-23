@@ -12,6 +12,11 @@ public class Store {
     // instance properties
     private List<Media> itemsInStore = new ArrayList<Media>();
 
+    // getters, setters
+    public List<Media> getItemsInStore() {
+        return itemsInStore;
+    }
+
     // instance methods
     public void addMedia(Media media) {
         if (itemsInStore.contains(media)) System.out.println("Media is already in store.");
@@ -34,12 +39,20 @@ public class Store {
         System.out.println("Not exist in store.");
     }
 
+    public Media search(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle() != null && media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
     public void print() {
         int order = 1;
-        System.out.println("***********************CART***********************");
-        System.out.println("Ordered Items:");
-        for (Media mediaInList : itemsInStore) System.out.println(order + ". " + mediaInList.getTitle());
-        System.out.println("Total cost: " + totalCost());
+        System.out.println("***********************STORE***********************");
+        System.out.println("Items in store:");
+        for (Media mediaInList : itemsInStore) System.out.println(order + ". " + mediaInList.toString());
         System.out.println("***************************************************");
     }
 

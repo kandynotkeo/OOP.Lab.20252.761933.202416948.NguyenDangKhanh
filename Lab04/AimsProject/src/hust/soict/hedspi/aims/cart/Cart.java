@@ -12,6 +12,11 @@ public class Cart {
     // instance properties
     private List<Media> itemsOrdered = new ArrayList<Media>();
 
+    // getters, setters
+    public List<Media> getItemsOrdered() {
+        return itemsOrdered;
+    }
+
     // instance methods
     public void addMedia(Media media) {
         if (itemsOrdered.contains(media)) System.out.println("Media is already in cart.");
@@ -32,6 +37,21 @@ public class Cart {
             return;
         }
         System.out.println("Not exist in cart.");
+    }
+
+    public void empty() {
+        itemsOrdered.clear();
+        System.out.println("Cart has been emptied.");
+    }
+
+    public int countDVDs() {
+        int count = 0;
+        for (Media media : itemsOrdered) {
+            if (media instanceof hust.soict.hedspi.aims.media.DigitalVideoDisc) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public Media search(int id) {
@@ -58,7 +78,7 @@ public class Cart {
         int order = 1;
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
-        for (Media mediaInList : itemsOrdered) System.out.println(order + ". " + mediaInList.getTitle());
+        for (Media mediaInList : itemsOrdered) System.out.println(order + ". " + mediaInList.toString());
         System.out.println("Total cost: " + totalCost());
         System.out.println("***************************************************");
     }
