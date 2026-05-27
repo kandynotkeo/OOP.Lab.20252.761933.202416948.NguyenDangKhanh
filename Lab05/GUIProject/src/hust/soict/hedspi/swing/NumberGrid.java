@@ -5,9 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class NumberGrid extends JFrame {
-    private JButton[] btnNums = new JButton[10];
-    private JButton btnDel, btnReset;
-    private JTextField tfDisplay;
+    private final JButton[] btnNums = new JButton[10];
+    private final JTextField tfDisplay;
 
     public NumberGrid() {
         tfDisplay = new JTextField();
@@ -39,7 +38,7 @@ public class NumberGrid extends JFrame {
             btnNums[i].addActionListener(btnListener);
         }
 
-        btnDel = new JButton("DEL");
+        JButton btnDel = new JButton("DEL");
         panelBtns.add(btnDel);
         btnDel.addActionListener(btnListener);
 
@@ -47,7 +46,7 @@ public class NumberGrid extends JFrame {
         panelBtns.add(btnNums[0]);
         btnNums[0].addActionListener(btnListener);
 
-        btnReset = new JButton("C");
+        JButton btnReset = new JButton("C");
         panelBtns.add(btnReset);
         btnReset.addActionListener(btnListener);
     }
