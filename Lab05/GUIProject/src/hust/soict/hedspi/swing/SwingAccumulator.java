@@ -25,47 +25,10 @@ public class SwingAccumulator extends JFrame {
         tfOutput.setEditable(false);
         cp.add(tfOutput);
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Swing Accumulator");
         setSize(512, 128);
         setVisible(true);
-
-        addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent windowEvent) {
-                System.out.println("opened");
-            }
-
-            @Override
-            public void windowClosing(WindowEvent windowEvent) {
-                System.out.println("closing");
-                System.exit(0);
-            }
-
-            @Override
-            public void windowClosed(WindowEvent windowEvent) {
-                System.out.println("closed");
-            }
-
-            @Override
-            public void windowIconified(WindowEvent windowEvent) {
-                System.out.println("iconified");
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent windowEvent) {
-                System.out.println("deiconified");
-            }
-
-            @Override
-            public void windowActivated(WindowEvent windowEvent) {
-                System.out.println("activated");
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent windowEvent) {
-                System.out.println("deactivated");
-            }
-        });
     }
 
     public static void main(String[] args) {
