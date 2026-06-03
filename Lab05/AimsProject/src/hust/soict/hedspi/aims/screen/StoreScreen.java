@@ -39,11 +39,9 @@ public class StoreScreen extends JFrame {
         center.setLayout(new GridLayout(3, 3, 2, 2));
 
         List<Media> mediaInStore = store.getItemsInStore();
-        for (int i = 0; i < 9; i++) {
-            MediaStore cell = new MediaStore(mediaInStore.get(i), cart);
-            center.add(cell);
-        }
-
+        int length = Math.min(mediaInStore.size(), 9);
+        for (int i = 0; i < length; i++) center.add(new MediaStore(mediaInStore.get(i), cart));
+        for (int i = length; i < 9; i++) center.add(new MediaStore(null, cart));
         return center;
     }
 

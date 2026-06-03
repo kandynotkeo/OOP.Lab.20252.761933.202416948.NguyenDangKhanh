@@ -1,15 +1,17 @@
 package hust.soict.hedspi.aims.cart;
 
 import hust.soict.hedspi.aims.media.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.*;
 
 public class Cart {
     // instance properties
-    private List<Media> itemsOrdered = new ArrayList<Media>();
+    private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
     // getters, setters
-    public List<Media> getItemsOrdered() {
+    public ObservableList<Media> getItemsOrdered() {
         return itemsOrdered;
     }
 
@@ -18,16 +20,14 @@ public class Cart {
         if (itemsOrdered.contains(media)) return "media is already in cart.";
         itemsOrdered.add(media);
         return "added to cart.";
-
     }
 
-    public void removeMedia(Media media) {
+    public String removeMedia(Media media) {
         if (itemsOrdered.contains(media)) {
             itemsOrdered.remove(media);
-            System.out.println("Removed from cart.");
-            return;
+            return ("removed from cart.");
         }
-        System.out.println("Not exist in cart.");
+        return ("media is not exist in cart.");
     }
 
     public void empty() {

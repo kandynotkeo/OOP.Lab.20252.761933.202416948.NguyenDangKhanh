@@ -14,11 +14,17 @@ public class MediaStore extends JPanel {
         this.media = media;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JLabel title = new JLabel(media.getTitle());
+        String mTitle = "", mCost = "0$";
+        if (media != null) {
+            mTitle = media.getTitle();
+            mCost = media.getCost() + "$";
+        }
+
+        JLabel title = new JLabel(mTitle);
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 20));
         title.setAlignmentX(CENTER_ALIGNMENT);
 
-        JLabel cost = new JLabel(media.getCost() + "$");
+        JLabel cost = new JLabel(mCost);
         cost.setAlignmentX(CENTER_ALIGNMENT);
 
         JPanel container = new JPanel();
