@@ -14,12 +14,11 @@ public class Cart {
     }
 
     // instance methods
-    public void addMedia(Media media) {
-        if (itemsOrdered.contains(media)) System.out.println("Media is already in cart.");
-        else {
-            itemsOrdered.add(media);
-            System.out.println("Added to cart.");
-        }
+    public String addMedia(Media media) {
+        if (itemsOrdered.contains(media)) return "media is already in cart.";
+        itemsOrdered.add(media);
+        return "added to cart.";
+
     }
 
     public void removeMedia(Media media) {

@@ -1,5 +1,6 @@
 package hust.soict.hedspi.aims.screen;
 
+import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.store.Store;
 
@@ -9,9 +10,11 @@ import java.util.List;
 
 public class StoreScreen extends JFrame {
     private Store store;
+    private Cart cart;
 
-    public StoreScreen(Store store) {
+    public StoreScreen(Store store, Cart cart) {
         this.store = store;
+        this.cart = cart;
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
 
@@ -37,7 +40,7 @@ public class StoreScreen extends JFrame {
 
         List<Media> mediaInStore = store.getItemsInStore();
         for (int i = 0; i < 9; i++) {
-            MediaStore cell = new MediaStore(mediaInStore.get(i));
+            MediaStore cell = new MediaStore(mediaInStore.get(i), cart);
             center.add(cell);
         }
 
