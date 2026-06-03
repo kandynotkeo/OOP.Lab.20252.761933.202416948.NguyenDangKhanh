@@ -1,16 +1,14 @@
 package hust.soict.hedspi.aims.media;
 
 import java.util.*;
+import hust.soict.hedspi.aims.exception.PlayerException;
 
 public class CompactDisc extends Disc implements Playable {
-    // classifier properties
     private static int nbCompactDiscs = 0;
 
-    // instance properties
     private String artist;
     private List<Track> tracks = new ArrayList<Track>();
 
-    // constructors
     public CompactDisc(String title, String director, String category, int length, double cost) {
         super(++nbCompactDiscs, title, director, category, length, cost);
     }
@@ -19,23 +17,40 @@ public class CompactDisc extends Disc implements Playable {
         this.artist = sanitise(artist);
     }
 
-    // instance methods
     public String formatArtist() {
         return artist == null ? "anonymous" : artist;
     }
 
-    public String formatLength() {
+    public int getLength() {
         int totalLength = 0;
         for (Track track : tracks) totalLength += track.getLength();
+        return totalLength;
+    }
+
+    public String formatLength() {
+        int totalLength = getLength();
         if (totalLength <= 0) return "unavailable";
         int min = totalLength / 60, sec = totalLength % 60;
         return String.format("%d:%02d", min, sec);
     }
 
-    public void play() {
-        String artist = formatArtist();
-        System.out.println("Playing CD: " + artist);
-        for (Track track : tracks) track.play();
+    @Override
+    public void play() throws PlayerException {
+        if (this.getLength() > 0) {
+            String artist = formatArtist();
+            System.out.println("Playing CD: " + artist);
+            Iterator iterator = tracks.iterator();
+            while (iterator.hasNext()) {
+                Track nextTrack = (Track) iterator.next();
+                try {
+                    nextTrack.play();
+                } catch (PlayerException e) {
+                    throw e;
+                }
+            }
+        } else {
+            throw new PlayerException("ERROR: CD length is non-positive!");
+        }
     }
 
     public void addTrack(Track track) {

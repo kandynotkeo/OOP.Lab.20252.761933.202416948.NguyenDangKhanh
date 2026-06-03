@@ -3,17 +3,14 @@ package hust.soict.hedspi.aims.media;
 import java.util.*;
 
 public abstract class Media {
-    // classifier methods
     public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
     public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 
-    // instance properties
     private final int id;
     private String title;
     private String category;
     private double cost;
 
-    // constructors
     public Media(int id, String title, String category, double cost) {
         this.id = id;
         this.title = sanitise(title);
@@ -21,7 +18,6 @@ public abstract class Media {
         this.cost = cost;
     }
 
-    // getters, setters
     public int getId() {
         return id;
     }
@@ -30,11 +26,14 @@ public abstract class Media {
         return title;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public double getCost() {
         return cost;
     }
 
-    // instance methods
     protected String sanitise(String input) {
         return input == null || input.isBlank() ? null : input;
     }
@@ -55,9 +54,16 @@ public abstract class Media {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Media)) return false;
-        String titleA = this.getTitle(), titleB = ((Media) o).getTitle();
-        if (titleA == null || titleB == null) return false;
-        return titleA.equals(titleB);
+        try {
+            String titleA = this.getTitle();
+            String titleB = ((Media) o).getTitle();
+            if (titleA == null || titleB == null) return false;
+            return titleA.equals(titleB);
+        } catch (NullPointerException e) {
+            return false;
+        } catch (ClassCastException e) {
+            return false;
+        }
     }
 
     protected Map<String, Object> getDetails() {

@@ -1,29 +1,28 @@
 package hust.soict.hedspi.aims.screen;
 
+import hust.soict.hedspi.aims.AimsApp;
 import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.Media;
 import hust.soict.hedspi.aims.store.Store;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-public class StoreScreen extends JFrame {
+public class StoreScreen extends JPanel {
     private Store store;
     private Cart cart;
+    private AimsApp app;
 
-    public StoreScreen(Store store, Cart cart) {
+    public StoreScreen(Store store, Cart cart, AimsApp app) {
         this.store = store;
         this.cart = cart;
-        Container cp = getContentPane();
-        cp.setLayout(new BorderLayout());
-
-        cp.add(createNorth(), BorderLayout.NORTH);
-        cp.add(createCenter(), BorderLayout.CENTER);
-
-        setVisible(true);
-        setTitle("Store");
-        setSize(1024, 768);
+        this.app = app;
+        setLayout(new BorderLayout());
+        add(createNorth(), BorderLayout.NORTH);
+        add(createCenter(), BorderLayout.CENTER);
     }
 
     JPanel createNorth() {
@@ -49,13 +48,53 @@ public class StoreScreen extends JFrame {
         JMenu menu = new JMenu("options");
 
         JMenu smUpdateStore = new JMenu("update Store");
-        smUpdateStore.add(new JMenuItem("add Book"));
-        smUpdateStore.add(new JMenuItem("add CD"));
-        smUpdateStore.add(new JMenuItem("add DVD"));
+
+        JMenuItem addBookItem = new JMenuItem("add Book");
+        addBookItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddBookToStoreScreen(store);
+            }
+        });
+        smUpdateStore.add(addBookItem);
+
+        JMenuItem addCDItem = new JMenuItem("add CD");
+        addCDItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddCompactDiscToStoreScreen(store);
+            }
+        });
+        smUpdateStore.add(addCDItem);
+
+        JMenuItem addDVDItem = new JMenuItem("add DVD");
+        addDVDItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddDigitalVideoDiscToStoreScreen(store);
+            }
+        });
+        smUpdateStore.add(addDVDItem);
 
         menu.add(smUpdateStore);
-        menu.add(new JMenuItem("view Store"));
-        menu.add(new JMenuItem("view Cart"));
+
+        JMenuItem viewStoreItem = new JMenuItem("view Store");
+        viewStoreItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.showStore();
+            }
+        });
+        menu.add(viewStoreItem);
+
+        JMenuItem viewCartItem = new JMenuItem("view Cart");
+        viewCartItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.showCart();
+            }
+        });
+        menu.add(viewCartItem);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -72,14 +111,20 @@ public class StoreScreen extends JFrame {
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 50));
         title.setForeground(Color.CYAN);
 
-        JButton cart = new JButton("view Cart");
-        cart.setPreferredSize(new Dimension(100, 50));
-        cart.setMinimumSize(new Dimension(100, 50));
+        JButton cartBtn = new JButton("view Cart");
+        cartBtn.setPreferredSize(new Dimension(100, 50));
+        cartBtn.setMinimumSize(new Dimension(100, 50));
+        cartBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.showCart();
+            }
+        });
 
         header.add(Box.createRigidArea(new Dimension(10, 10)));
         header.add(title);
         header.add(Box.createHorizontalGlue());
-        header.add(cart);
+        header.add(cartBtn);
         header.add(Box.createRigidArea(new Dimension(10, 10)));
 
         return header;

@@ -3,18 +3,19 @@ package hust.soict.hedspi.aims.media;
 import java.util.Map;
 
 public class Disc extends Media {
-    // instance properties
     private String director;
     private int length;
 
-    // constructors
     public Disc(int id, String title, String director, String category, int length, double cost) {
         super(id, title, category, cost);
         this.director = sanitise(director);
         this.length = Math.max(length, 0);
     }
 
-    // instance methods
+    public int getLength() {
+        return length;
+    }
+
     public String formatDirector() {
         return director == null ? "anonymous" : director;
     }

@@ -1,6 +1,7 @@
 package hust.soict.hedspi.aims;
 
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.*;
 import hust.soict.hedspi.aims.store.Store;
 
@@ -109,8 +110,13 @@ public class AIMS {
                 if (media instanceof DigitalVideoDisc)
                     System.out.println("current number of DVDs in cart: " + cart.countDVDs());
             } else if (choice == 2)
-                if (media instanceof Playable) ((Playable) media).play();
-                else System.out.println("media is not playable.");
+                if (media instanceof Playable) {
+                    try {
+                        ((Playable) media).play();
+                    } catch (PlayerException e) {
+                        System.err.println(e.getMessage());
+                    }
+                } else System.out.println("media is not playable.");
             else break;
         }
     }
@@ -140,8 +146,13 @@ public class AIMS {
         System.out.print("media title to play: ");
         String title = scanner.nextLine();
         Media media = store.search(title);
-        if (media instanceof Playable) ((Playable) media).play();
-        else if (media != null) System.out.println("media is not playable.");
+        if (media instanceof Playable) {
+            try {
+                ((Playable) media).play();
+            } catch (PlayerException e) {
+                System.err.println(e.getMessage());
+            }
+        } else if (media != null) System.out.println("media is not playable.");
     }
 
     public static void updateStore() {
@@ -260,8 +271,13 @@ public class AIMS {
         System.out.print("title to play: ");
         String title = scanner.nextLine();
         Media media = cart.search(title);
-        if (media instanceof Playable) ((Playable) media).play();
-        else if (media != null) System.out.println("media is not playable.");
+        if (media instanceof Playable) {
+            try {
+                ((Playable) media).play();
+            } catch (PlayerException e) {
+                System.err.println(e.getMessage());
+            }
+        } else if (media != null) System.out.println("media is not playable.");
     }
 
     private static void placeOrder() {

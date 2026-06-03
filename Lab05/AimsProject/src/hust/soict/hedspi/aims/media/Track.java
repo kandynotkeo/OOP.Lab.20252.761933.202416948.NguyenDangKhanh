@@ -1,14 +1,12 @@
 package hust.soict.hedspi.aims.media;
 
-
+import hust.soict.hedspi.aims.exception.PlayerException;
 import java.util.*;
 
 public class Track implements Playable {
-    // instance properties
     private String title;
     private int length;
 
-    // constructors
     public Track(String title, int length) {
         this.title = sanitise(title);
         this.length = Math.max(length, 0);
@@ -18,7 +16,6 @@ public class Track implements Playable {
         return length;
     }
 
-    // instance methods
     protected String sanitise(String input) {
         return input == null || input.isBlank() ? null : input;
     }
@@ -33,8 +30,23 @@ public class Track implements Playable {
         return String.format("%d:%02d", min, sec);
     }
 
-    public void play() {
-        System.out.println("Playing track: " + formatTitle() + " (" + formatLength() + ")");
+    @Override
+    public void play() throws PlayerException {
+        if (this.getLength() > 0) {
+            System.out.println("Playing track: " + formatTitle() + " (" + formatLength() + ")");
+        } else {
+            System.err.println("ERROR: Track length is non-positive!");
+            throw new PlayerException("ERROR: Track length is non-positive!");
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Track)) return false;
+        Track other = (Track) obj;
+        if (this.title == null || other.title == null) return false;
+        return this.title.equals(other.title) && this.length == other.length;
     }
 
     protected Map<String, Object> getDetails() {

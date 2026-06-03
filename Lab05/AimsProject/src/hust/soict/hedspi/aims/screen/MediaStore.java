@@ -1,6 +1,7 @@
 package hust.soict.hedspi.aims.screen;
 
 import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.exception.PlayerException;
 import hust.soict.hedspi.aims.media.*;
 
 import javax.swing.*;
@@ -44,6 +45,22 @@ public class MediaStore extends JPanel {
             playBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
+                    try {
+                        ((Playable) media).play();
+                        JDialog playDialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(MediaStore.this), "Play", true);
+                        playDialog.setLayout(new BorderLayout());
+                        JLabel msg = new JLabel("Playing: " + media.getTitle(), SwingConstants.CENTER);
+                        msg.setFont(new Font(msg.getFont().getName(), Font.PLAIN, 20));
+                        playDialog.add(msg, BorderLayout.CENTER);
+                        JButton ok = new JButton("OK");
+                        ok.addActionListener(e -> playDialog.dispose());
+                        playDialog.add(ok, BorderLayout.SOUTH);
+                        playDialog.setSize(300, 150);
+                        playDialog.setLocationRelativeTo(MediaStore.this);
+                        playDialog.setVisible(true);
+                    } catch (PlayerException e) {
+                        JOptionPane.showMessageDialog(MediaStore.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             });
             container.add(playBtn);

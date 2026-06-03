@@ -3,59 +3,47 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
-<BorderPane prefHeight="768.0" prefWidth="1024.0" fx:controller="hust.soict.hedspi.aims.screen.controller.CartScreenController"
+<BorderPane prefHeight="768.0" prefWidth="1024.0"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <top>
-        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <MenuBar>
-                <Menu mnemonicParsing="false" text="Options">
-                    <Menu mnemonicParsing="false" text="update Store">
-                        <MenuItem mnemonicParsing="false" text="add Book"/>
-                        <MenuItem mnemonicParsing="false" text="add CD"/>
-                        <MenuItem mnemonicParsing="false" text="add DVD"/>
-                    </Menu>
-                    <MenuItem mnemonicParsing="false" text="view Store"/>
-                    <MenuItem mnemonicParsing="false" text="view Cart"/>
+        <MenuBar>
+            <Menu mnemonicParsing="false" text="Options">
+                <Menu mnemonicParsing="false" text="Update Store">
+                    <MenuItem mnemonicParsing="false" onAction="#addBook" text="Add Book"/>
+                    <MenuItem mnemonicParsing="false" onAction="#addCD" text="Add CD"/>
+                    <MenuItem mnemonicParsing="false" onAction="#addDVD" text="Add DVD"/>
                 </Menu>
-            </MenuBar>
-            <Label text="CART" textFill="#00ffff">
-                <font>
-                    <Font size="50.0"/>
-                </font>
-                <VBox.margin>
-                    <Insets left="10.0"/>
-                </VBox.margin>
-            </Label>
-        </VBox>
+            </Menu>
+        </MenuBar>
     </top>
     <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <VBox BorderPane.alignment="CENTER">
             <padding>
-                <Insets left="10.0"/>
+                <Insets left="15.0" right="15.0" top="10.0" bottom="10.0"/>
             </padding>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                 <padding>
                     <Insets top="10.0" bottom="10.0"/>
                 </padding>
                 <Label text="Filter:"/>
-                <TextField fx:id="tfFilter"/>
+                <TextField fx:id="tfFilter" HBox.hgrow="ALWAYS"/>
                 <RadioButton fx:id="radioBtnFilterId" mnemonicParsing="false" onAction="#filterModeChanged"
-                             selected="true" text="by ID">
+                             selected="true" text="By ID">
                     <toggleGroup>
                         <ToggleGroup fx:id="filterCategory"/>
                     </toggleGroup>
                 </RadioButton>
                 <RadioButton fx:id="radioBtnFilterTitle" mnemonicParsing="false" onAction="#filterModeChanged"
-                             text="by title" toggleGroup="$filterCategory"/>
+                             text="By Title" toggleGroup="$filterCategory"/>
             </HBox>
-            <TableView fx:id="tblMedia" columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+            <TableView fx:id="tblMedia" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="colMediaTitle" prefWidth="75.0" text="title"/>
-                    <TableColumn fx:id="colMediaCategory" prefWidth="75.0" text="category"/>
-                    <TableColumn fx:id="colMediaCost" prefWidth="75.0" text="cost"/>
+                    <TableColumn fx:id="colMediaTitle" prefWidth="300.0" text="Title"/>
+                    <TableColumn fx:id="colMediaCategory" prefWidth="300.0" text="Category"/>
+                    <TableColumn fx:id="colMediaCost" prefWidth="150.0" text="Cost"/>
                 </columns>
             </TableView>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+            <ButtonBar>
                 <buttons>
                     <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#btnPlayPressed" text="Play"/>
                     <Button fx:id="btnRemove" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove"/>
@@ -64,12 +52,12 @@
         </VBox>
     </center>
     <right>
-        <VBox alignment="TOP_CENTER" prefHeight="200.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" minWidth="200.0" spacing="20.0">
             <padding>
-                <Insets top="50.0"/>
+                <Insets top="30.0" left="15.0" right="15.0"/>
             </padding>
             <HBox alignment="CENTER" spacing="10.0">
-                <Label text="total:">
+                <Label text="Total:">
                     <font>
                         <Font size="24.0"/>
                     </font>
@@ -80,10 +68,11 @@
                     </font>
                 </Label>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#btnPlaceOrderPressed" style="-fx-background-color: red;"
-                    text="place order" textFill="#ffffff">
+            <Button mnemonicParsing="false" onAction="#btnPlaceOrderPressed"
+                    style="-fx-background-color: red; -fx-text-fill: white;"
+                    text="Place Order" maxWidth="1.7976931348623157E308">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="18.0"/>
                 </font>
             </Button>
         </VBox>

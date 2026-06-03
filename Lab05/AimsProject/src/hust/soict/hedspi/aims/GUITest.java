@@ -1,9 +1,8 @@
 package hust.soict.hedspi.aims;
 
-import hust.soict.hedspi.aims.screen.StoreScreen;
-import hust.soict.hedspi.aims.store.Store;
 import hust.soict.hedspi.aims.cart.Cart;
 import hust.soict.hedspi.aims.media.*;
+import hust.soict.hedspi.aims.store.Store;
 
 public class GUITest {
     private static final Store store = new Store();
@@ -11,8 +10,7 @@ public class GUITest {
 
     public static void main(String[] args) {
         initStore();
-
-        new StoreScreen(store, cart);
+        new AimsApp(store, cart);
     }
 
     private static void initStore() {
